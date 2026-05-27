@@ -8,19 +8,16 @@ datasource db {
 }
 
 model Product {
-  id String @id
-  title String
-  price Float
-  stock Int
-  slug String?
-  description String?
-  createdAt DateTime
-  updatedAt DateTime?
-  images Image[]
+  id        String   @id @default(cuid())
+  name      String
+  price     Float
+  images    Image[]
 }
 
 model Image {
-  id String @id
-  url String
+  id        String  @id @default(cuid())
+  url       String
+
   productId String
+  product   Product @relation(fields: [productId], references: [id])
 }
